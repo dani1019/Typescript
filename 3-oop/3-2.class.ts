@@ -1,6 +1,3 @@
-//CoffeeMachine
-//coffeeBeans
-//makeCoffee
 {
     type CoffeeCup = {
         shots: number,
@@ -8,31 +5,30 @@
     }
     class CoffeeMaker{
         //shotNumber : number;
-        BEANS_GRAMM_PER_SHOT : number = 7;
+        static BEANS_GRAMM_PER_SHOT : number = 7;
         coffeeBeans : number = 0;
 
         constructor(coffeeBeans: number){
             this.coffeeBeans = coffeeBeans;
         }
+
+        static makeMachine(coffeeBeans : number) : CoffeeMaker{
+            return new CoffeeMaker(coffeeBeans);
+        }
+
         makeCoffee(shots: number): CoffeeCup{
-            if(this.coffeeBeans < shots*this.BEANS_GRAMM_PER_SHOT){
+            if(this.coffeeBeans < shots*CoffeeMaker.BEANS_GRAMM_PER_SHOT){
                 throw new Error('Not enough Coffee');
             }
-             this.coffeeBeans -= shots * this.BEANS_GRAMM_PER_SHOT;
+             this.coffeeBeans -= shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT;
              return {
                  shots : shots,
-                 volumn : shots * this.BEANS_GRAMM_PER_SHOT
+                 volumn : shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT
              }
         }
-        // if(coffeeBeans < shots*BEANS_GRAMM_PER_SHOT){
-        //     
-        // }
-        // coffeeBeans -= shots * BEANS_GRAMM_PER_SHOT;
-        // return {
-        //     shots : shots,
-        //     volumn : shots * BEANS_GRAMM_PER_SHOT
-        // }
     }
-    const maker = new CoffeeMaker(10);
+    const maker= CoffeeMaker.makeMachine(34);
+    console.log(maker);
+    maker.makeCoffee(3);
     console.log(maker);
 }
